@@ -3,25 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surya Arakalgud Mahesh | Systems & Data Professional</title>
+  <title>Surya Arakalgud Mahesh | Technology & Systems Professional</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
+      /* Updated color palette to match purple tie/pocket square */
       --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a24;
-      --bg-card-hover: #222230;
-      --accent: #00e5cc;
-      --accent-dim: #00e5cc33;
-      --accent-glow: #00e5cc66;
+      --bg-secondary: #110f18;
+      --bg-card: #1a1722;
+      --bg-card-hover: #242030;
+      --accent: #a78bfa;
+      --accent-dim: #a78bfa25;
+      --accent-glow: #a78bfa50;
+      --accent-bright: #c4b5fd;
+      --accent-2: #818cf8;
+      --accent-2-dim: #818cf825;
+      --accent-3: #f472b6;
+      --accent-3-dim: #f472b625;
       --text-primary: #f0f0f5;
-      --text-secondary: #9090a0;
+      --text-secondary: #9898a8;
       --text-muted: #606070;
-      --border: #2a2a3a;
-      --gradient-1: linear-gradient(135deg, #00e5cc 0%, #00a3ff 100%);
-      --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+      --border: #2a2835;
+      --gradient-1: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
+      --gradient-2: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+      --gradient-3: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
@@ -49,7 +56,6 @@
       color: var(--bg-primary);
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -90,7 +96,7 @@
     }
 
     .nav.scrolled {
-      background: rgba(10, 10, 15, 0.9);
+      background: rgba(10, 10, 15, 0.95);
       backdrop-filter: blur(20px);
       padding: 1rem 3rem;
       border-bottom: 1px solid var(--border);
@@ -102,9 +108,6 @@
       font-weight: 700;
       color: var(--text-primary);
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .nav-logo span {
@@ -113,14 +116,14 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 500;
       position: relative;
       transition: color 0.3s ease;
@@ -155,6 +158,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-decoration: none;
     }
 
     .nav-cta:hover {
@@ -163,13 +167,14 @@
       box-shadow: 0 0 30px var(--accent-glow);
     }
 
-    /* Mobile Menu */
     .menu-toggle {
       display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
       z-index: 1001;
+      background: none;
+      border: none;
     }
 
     .menu-toggle span {
@@ -177,6 +182,42 @@
       height: 2px;
       background: var(--text-primary);
       transition: all 0.3s ease;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-primary);
+      z-index: 999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-menu.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
     }
 
     /* Hero Section */
@@ -217,13 +258,23 @@
       animation: pulse 8s ease-in-out infinite;
     }
 
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--accent-3-dim) 0%, transparent 70%);
+      bottom: 10%;
+      left: 5%;
+      animation: pulse 10s ease-in-out infinite reverse;
+    }
+
     @keyframes pulse {
       0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
       50% { opacity: 0.8; transform: translateY(-50%) scale(1.1); }
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 900px;
       z-index: 1;
     }
 
@@ -257,7 +308,7 @@
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 1.5rem;
@@ -275,15 +326,20 @@
     .hero-subtitle {
       font-size: 1.25rem;
       color: var(--text-secondary);
-      max-width: 600px;
+      max-width: 750px;
       margin-bottom: 2.5rem;
       animation: fadeInUp 0.8s ease 0.2s forwards;
       opacity: 0;
     }
 
+    .hero-subtitle strong {
+      color: var(--text-primary);
+    }
+
     .hero-buttons {
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
       animation: fadeInUp 0.8s ease 0.3s forwards;
       opacity: 0;
     }
@@ -338,6 +394,7 @@
       border-top: 1px solid var(--border);
       animation: fadeInUp 0.8s ease 0.4s forwards;
       opacity: 0;
+      flex-wrap: wrap;
     }
 
     .stat {
@@ -369,13 +426,19 @@
 
     /* Section Styles */
     .section {
-      padding: 8rem 3rem;
+      padding: 7rem 3rem;
       position: relative;
     }
 
     .section-header {
-      max-width: 600px;
+      max-width: 700px;
       margin-bottom: 4rem;
+    }
+
+    .section-header.center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .section-label {
@@ -395,19 +458,117 @@
       line-height: 1.2;
     }
 
-    /* About Section */
-    .about {
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    /* Value Proposition Section */
+    .value-prop {
       background: var(--bg-secondary);
     }
 
-    .about-grid {
+    .value-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--card-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .value-card:hover {
+      border-color: transparent;
+      transform: translateY(-8px);
+    }
+
+    .value-card:hover::before {
+      opacity: 1;
+    }
+
+    .value-card:nth-child(1) { --card-gradient: var(--gradient-1); }
+    .value-card:nth-child(2) { --card-gradient: var(--gradient-2); }
+    .value-card:nth-child(3) { --card-gradient: var(--gradient-3); }
+
+    .value-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .value-card:nth-child(1) .value-icon {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2) 0%, rgba(129, 140, 248, 0.2) 100%);
+    }
+
+    .value-card:nth-child(2) .value-icon {
+      background: linear-gradient(135deg, rgba(129, 140, 248, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+    }
+
+    .value-card:nth-child(3) .value-icon {
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+    }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .value-description {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .value-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .value-skill {
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
       align-items: center;
     }
 
-    .about-image {
+    .about-visual {
       position: relative;
     }
 
@@ -415,53 +576,118 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      aspect-ratio: 4/5;
-      background: var(--bg-card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .about-initials {
-      font-family: var(--font-display);
-      font-size: 8rem;
-      font-weight: 800;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .about-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      filter: grayscale(10%);
+      transition: all 0.4s ease;
+    }
+
+    .about-image-wrapper:hover .about-image {
+      filter: grayscale(0%);
+      transform: scale(1.02);
     }
 
     .about-image-wrapper::before {
       content: '';
       position: absolute;
       inset: 0;
-      border: 1px solid var(--accent-dim);
+      border: 2px solid var(--accent-dim);
       border-radius: 20px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .about-image-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 15, 0.8) 100%);
+      border-radius: 20px;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .about-decorator {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 100%;
+      height: 100%;
       border: 2px solid var(--accent);
       border-radius: 20px;
-      top: -20px;
-      right: -20px;
+      top: 20px;
+      left: 20px;
       z-index: -1;
+      opacity: 0.5;
     }
 
-    .about-content p {
+    .about-badges {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      z-index: 2;
+    }
+
+    .about-badge {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+    }
+
+    .about-badge span {
+      color: var(--accent);
+    }
+
+    .about-text p {
       color: var(--text-secondary);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin-bottom: 1.5rem;
     }
 
-    .about-content p strong {
+    .about-text p strong {
       color: var(--text-primary);
     }
 
+    .about-highlight {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      margin-top: 2rem;
+    }
+
+    .about-highlight-icon {
+      font-size: 1.5rem;
+    }
+
+    .about-highlight-text {
+      color: var(--text-secondary);
+    }
+
+    .about-highlight-text strong {
+      color: var(--accent);
+    }
+
     /* Experience Section */
+    .experience {
+      background: var(--bg-secondary);
+    }
+
     .experience-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -484,7 +710,6 @@
 
     .experience-card:hover {
       border-color: var(--accent-dim);
-      transform: translateY(-5px);
     }
 
     .experience-header {
@@ -492,6 +717,8 @@
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .experience-company {
@@ -514,57 +741,26 @@
       color: var(--text-secondary);
     }
 
-    .experience-list {
+    .experience-grid {
       display: grid;
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
     }
 
     .experience-item {
       display: flex;
       gap: 1rem;
-      color: var(--text-secondary);
-    }
-
-    .experience-item::before {
-      content: '→';
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* Skills Section */
-    .skills {
+      padding: 1rem;
       background: var(--bg-secondary);
+      border-radius: 12px;
+      transition: all 0.3s ease;
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+    .experience-item:hover {
+      background: var(--bg-card-hover);
     }
 
-    .skill-category {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: all 0.4s ease;
-    }
-
-    .skill-category:hover {
-      border-color: var(--accent-dim);
-    }
-
-    .skill-category-title {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .skill-category-icon {
+    .experience-item-icon {
       width: 40px;
       height: 40px;
       background: var(--accent-dim);
@@ -572,13 +768,159 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .experience-item-content h4 {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .experience-item-content p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .experience-metric {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--project-gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-5px);
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .project-card:nth-child(1) { --project-gradient: var(--gradient-1); }
+    .project-card:nth-child(2) { --project-gradient: var(--gradient-2); }
+    .project-card:nth-child(3) { --project-gradient: var(--gradient-3); }
+    .project-card:nth-child(4) { --project-gradient: var(--gradient-1); }
+
+    .project-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      background: var(--accent-dim);
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-tag {
+      padding: 0.3rem 0.7rem;
+      background: var(--bg-secondary);
+      border-radius: 15px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Skills Section */
+    .skills {
+      background: var(--bg-secondary);
+    }
+
+    .skills-mega-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+      border-color: var(--accent-dim);
+    }
+
+    .skill-category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-category-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-category-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
     }
 
     .skill-bars {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 0.9rem;
     }
 
     .skill-bar {
@@ -588,8 +930,8 @@
     .skill-bar-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.8rem;
     }
 
     .skill-bar-name {
@@ -602,32 +944,35 @@
     }
 
     .skill-bar-track {
-      height: 8px;
+      height: 5px;
       background: var(--bg-secondary);
-      border-radius: 4px;
+      border-radius: 3px;
       overflow: hidden;
     }
 
     .skill-bar-fill {
       height: 100%;
-      background: var(--gradient-1);
-      border-radius: 4px;
+      border-radius: 3px;
       width: 0;
       transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    .skill-bar-fill.gradient-1 { background: var(--gradient-1); }
+    .skill-bar-fill.gradient-2 { background: var(--gradient-2); }
+    .skill-bar-fill.gradient-3 { background: var(--gradient-3); }
+
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.4rem;
     }
 
     .skill-tag {
-      padding: 0.5rem 1rem;
+      padding: 0.35rem 0.7rem;
       background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 0.85rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
       color: var(--text-secondary);
       transition: all 0.3s ease;
     }
@@ -640,7 +985,7 @@
     /* Education Section */
     .education-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
     }
 
@@ -649,7 +994,6 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 2.5rem;
-      position: relative;
       transition: all 0.4s ease;
     }
 
@@ -672,7 +1016,7 @@
 
     .education-degree {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
@@ -686,85 +1030,132 @@
     .education-details {
       color: var(--text-muted);
       font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
 
-    /* Achievements Section */
-    .achievements {
+    .education-coursework {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .education-coursework h4 {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .coursework-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .coursework-tag {
+      padding: 0.3rem 0.6rem;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    /* Publications Section */
+    .publications {
       background: var(--bg-secondary);
     }
 
-    .achievements-grid {
+    .publications-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
 
-    .achievement-card {
+    .publication-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 1.75rem;
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
     }
 
-    .achievement-card:hover {
+    .publication-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-1);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .publication-card:hover {
       border-color: var(--accent-dim);
       transform: translateY(-5px);
     }
 
-    .achievement-icon {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+    .publication-card:hover::before {
+      transform: scaleX(1);
     }
 
-    .achievement-title {
+    .publication-year {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      background: var(--accent-dim);
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .publication-title {
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       line-height: 1.4;
     }
 
-    .achievement-meta {
+    .publication-journal {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin-bottom: 1rem;
     }
 
-    .achievement-link {
+    .publication-link {
       margin-top: auto;
       color: var(--accent);
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.85rem;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       transition: gap 0.3s ease;
     }
 
-    .achievement-link:hover {
+    .publication-link:hover {
       gap: 0.75rem;
     }
 
     /* Activities Section */
-    .activities-list {
+    .activities-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
-      max-width: 800px;
     }
 
-    .activity-item {
+    .activity-card {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       padding: 1.5rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -772,7 +1163,7 @@
       transition: all 0.3s ease;
     }
 
-    .activity-item:hover {
+    .activity-card:hover {
       border-color: var(--accent-dim);
     }
 
@@ -796,42 +1187,39 @@
 
     .activity-content p {
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .activity-content a {
       color: var(--accent);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     /* Contact Section */
-    .contact {
-      background: var(--bg-secondary);
-    }
-
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 4rem;
     }
 
     .contact-info h3 {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 1rem;
     }
 
-    .contact-info p {
+    .contact-info > p {
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
     }
 
     .contact-methods {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
     .contact-method {
@@ -870,7 +1258,9 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 3rem;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .contact-cta h3 {
@@ -888,7 +1278,6 @@
     /* Footer */
     .footer {
       padding: 3rem;
-      text-align: center;
       border-top: 1px solid var(--border);
     }
 
@@ -896,6 +1285,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
     }
 
     .footer-logo {
@@ -950,18 +1341,22 @@
         padding: 0 2rem;
       }
 
-      .about-grid,
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .about-visual {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
       .contact-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .about-image {
-        order: -1;
-      }
-
-      .hero-stats {
-        gap: 2rem;
       }
     }
 
@@ -970,11 +1365,7 @@
         padding: 1rem 1.5rem;
       }
 
-      .nav-links {
-        display: none;
-      }
-
-      .nav-cta {
+      .nav-links, .nav-cta {
         display: none;
       }
 
@@ -982,30 +1373,43 @@
         display: flex;
       }
 
+      .mobile-menu {
+        display: flex;
+      }
+
       .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
 
       .hero-stats {
-        flex-direction: column;
         gap: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
       }
 
       .hero-buttons {
         flex-direction: column;
       }
 
-      .skills-grid {
+      .about-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .experience-grid {
         grid-template-columns: 1fr;
       }
 
-      .education-grid {
+      .skills-mega-grid {
         grid-template-columns: 1fr;
       }
 
       .footer-content {
         flex-direction: column;
-        gap: 1.5rem;
+        text-align: center;
       }
     }
   </style>
@@ -1018,25 +1422,38 @@
   <nav class="nav" id="nav">
     <a href="#" class="nav-logo">S<span>.</span>AM</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
+      <li><a href="#value">What I Do</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
-      <li><a href="#achievements">Publications</a></li>
+      <li><a href="#publications">Research</a></li>
     </ul>
-    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Let's Connect</button>
-    <div class="menu-toggle" id="menuToggle">
+    <a href="#contact" class="nav-cta">Let's Connect</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
       <span></span>
       <span></span>
       <span></span>
-    </div>
+    </button>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#value">What I Do</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#publications">Research</a>
+    <a href="#contact">Contact</a>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-bg">
       <div class="hero-grid"></div>
       <div class="hero-glow"></div>
+      <div class="hero-glow-2"></div>
     </div>
     <div class="hero-content">
       <div class="hero-label">
@@ -1044,96 +1461,234 @@
         Open to opportunities
       </div>
       <h1 class="hero-title">
-        Hi, I'm <span class="gradient">Surya</span><br>
-        Arakalgud Mahesh
+        Building <span class="gradient">Secure Systems</span><br>
+        That Drive Business Value
       </h1>
       <p class="hero-subtitle">
-        Information Systems graduate student with software development experience at Bosch. Passionate about data-driven solutions and building technology that solves real business challenges.
+        I'm <strong>Surya Arakalgud Mahesh</strong> — a technology professional who bridges <strong>software engineering</strong>, <strong>cybersecurity</strong>, and <strong>business intelligence</strong> to deliver solutions that are robust, secure, and aligned with organizational goals.
       </p>
       <div class="hero-buttons">
         <a href="https://drive.google.com/file/d/1_dgCFLa6vAAgpZUa55UavH6_iYnq0qLI/view?usp=sharing" target="_blank" class="btn-primary">
-          <span>📄</span> Download Resume
+          📄 Download Resume
         </a>
-        <a href="#experience" class="btn-secondary">
-          <span>💼</span> View Experience
+        <a href="#value" class="btn-secondary">
+          ↓ Explore My Work
         </a>
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-number">1.8+</div>
-          <div class="stat-label">Years at Bosch</div>
+          <div class="stat-number">40%</div>
+          <div class="stat-label">ECU Reliability Boost</div>
         </div>
         <div class="stat">
           <div class="stat-number">4</div>
           <div class="stat-label">Published Papers</div>
         </div>
         <div class="stat">
-          <div class="stat-number">MSIS</div>
-          <div class="stat-label">Current Degree</div>
+          <div class="stat-number">May '26</div>
+          <div class="stat-label">MSIS Graduation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Proposition Section -->
+  <section id="value" class="section value-prop">
+    <div class="section-header center reveal">
+      <p class="section-label">What I Bring</p>
+      <h2 class="section-title">Three Pillars, One Vision</h2>
+      <p class="section-subtitle">My unique value lies in connecting technical depth with business impact and security awareness</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">⚙️</div>
+        <h3 class="value-title">Software Engineering</h3>
+        <p class="value-description">
+          I build fault-tolerant, distributed systems. At Bosch, I improved ECU communication reliability by 40% through zonal architecture integration, and led OTA diagnosis automation reducing manual intervention.
+        </p>
+        <div class="value-skills">
+          <span class="value-skill">Python</span>
+          <span class="value-skill">Embedded C</span>
+          <span class="value-skill">Distributed Systems</span>
+          <span class="value-skill">CI/CD</span>
+          <span class="value-skill">Performance Optimization</span>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">🛡️</div>
+        <h3 class="value-title">Cybersecurity</h3>
+        <p class="value-description">
+          Security is integral to how I build. From TLS/PKI implementation to ethical hacking and intrusion detection — I design systems that are secure by default, with expertise in threat intelligence and incident response.
+        </p>
+        <div class="value-skills">
+          <span class="value-skill">Nmap</span>
+          <span class="value-skill">Metasploit</span>
+          <span class="value-skill">Wireshark</span>
+          <span class="value-skill">SIEM</span>
+          <span class="value-skill">IDS/IPS</span>
+          <span class="value-skill">Digital Forensics</span>
+        </div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">📊</div>
+        <h3 class="value-title">Business Analysis</h3>
+        <p class="value-description">
+          Technology must serve business goals. I translate requirements into actionable insights, build dashboards for KPI tracking, and optimize processes using data-driven decision making with SQL, Power BI, and Tableau.
+        </p>
+        <div class="value-skills">
+          <span class="value-skill">Power BI</span>
+          <span class="value-skill">SQL</span>
+          <span class="value-skill">Tableau</span>
+          <span class="value-skill">Requirements Gathering</span>
+          <span class="value-skill">Process Mapping</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="section about">
-    <div class="about-grid">
-      <div class="about-image reveal">
+  <section id="about" class="section">
+    <div class="about-content">
+      <div class="about-visual reveal">
         <div class="about-image-wrapper">
-          <span class="about-initials">SAM</span>
+          <img src="IMG_8005.jpg" alt="Surya Arakalgud Mahesh" class="about-image">
         </div>
         <div class="about-decorator"></div>
+        <div class="about-badges">
+          <div class="about-badge">🎓 <span>MSIS</span> May '26</div>
+          <div class="about-badge">💼 <span>Ex-Bosch</span></div>
+        </div>
       </div>
-      <div class="about-content reveal">
+      <div class="about-text reveal">
         <div class="section-header">
           <p class="section-label">About Me</p>
-          <h2 class="section-title">Bridging Technology & Business Solutions</h2>
+          <h2 class="section-title">Where Engineering Meets Strategy</h2>
         </div>
         <p>
-          I'm a <strong>Master of Science in Information Systems</strong> student at California State University, Long Beach, with a strong foundation in data analysis, systems design, and project management.
+          I'm pursuing my <strong>Master's in Information Systems</strong> at California State University, Long Beach, specializing in <strong>cybersecurity and AI</strong>. My 1.8 years at <strong>Bosch Global Software Technologies</strong> gave me hands-on experience in system integration, fault-tolerant design, and team leadership.
         </p>
         <p>
-          My experience at <strong>Bosch Global Software Technologies</strong> taught me how to thrive in high-pressure environments, working on cutting-edge automotive software including OTA updates and fault handling systems for Volkswagen's MPCI project.
+          What sets me apart is my ability to see the complete picture — understanding not just <em>how</em> to build systems, but <em>how</em> to secure them and <em>why</em> they matter to the business. I'm building expertise in ethical hacking, ML for cybersecurity, and cloud security across AWS, Azure, and GCP.
         </p>
         <p>
-          I'm passionate about leveraging technology to solve complex business challenges, with particular interests in <strong>data-driven decision-making</strong> and <strong>information security</strong>. Currently, I'm fully invested in creating a <strong>P2P digital marketing platform</strong>.
+          Whether I'm debugging distributed systems, conducting vulnerability assessments, or building analytics dashboards — I bring the same mindset: <strong>build it right, build it secure, build it for impact.</strong>
         </p>
+        <div class="about-highlight">
+          <span class="about-highlight-icon">🚀</span>
+          <p class="about-highlight-text">
+            Currently building a <strong>P2P digital marketing platform</strong> — applying my full stack of skills to create technology that connects people and drives real business outcomes.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Experience Section -->
-  <section id="experience" class="section">
+  <section id="experience" class="section experience">
     <div class="section-header reveal">
-      <p class="section-label">Work Experience</p>
+      <p class="section-label">Experience</p>
       <h2 class="section-title">Professional Journey</h2>
     </div>
     <div class="experience-card reveal">
       <div class="experience-header">
         <div>
           <h3 class="experience-company">Bosch Global Software Technologies</h3>
-          <p class="experience-role">Software Developer</p>
+          <p class="experience-role">Software Engineer — Automotive Systems</p>
         </div>
-        <span class="experience-duration">1 Year 8 Months</span>
+        <span class="experience-duration">Sept 2022 – June 2024</span>
       </div>
-      <div class="experience-list">
+      <div class="experience-grid">
         <div class="experience-item">
-          Orchestrated seamless ECU communication using zonal architecture, successfully demonstrating proof of concept for next-gen automotive systems
+          <div class="experience-item-icon">📈</div>
+          <div class="experience-item-content">
+            <h4>Systems Integration</h4>
+            <p>Improved ECU communication reliability by <span class="experience-metric">40%</span> through zonal architecture integration and security protocols</p>
+          </div>
         </div>
         <div class="experience-item">
-          Led daily stand-up calls and streamlined ticket grooming in an Agile environment, improving team velocity and sprint delivery
+          <div class="experience-item-icon">🛡️</div>
+          <div class="experience-item-content">
+            <h4>Fault Management</h4>
+            <p>Designed and delivered fault management module for Volkswagen, ensuring fault-tolerant operation under strict deadlines</p>
+          </div>
         </div>
         <div class="experience-item">
-          Delivered successful OTA updates proof of concept for Volkswagen's MPCI project, enabling efficient remote ECU software updates
+          <div class="experience-item-icon">🔄</div>
+          <div class="experience-item-content">
+            <h4>OTA Automation</h4>
+            <p>Led team of 5 developing OTA diagnosis workflows, reducing manual intervention and improving observability</p>
+          </div>
         </div>
         <div class="experience-item">
-          Engineered the fault handling module within the safety component, playing a pivotal role in fault identification and resolution
+          <div class="experience-item-icon">📋</div>
+          <div class="experience-item-content">
+            <h4>Agile Leadership</h4>
+            <p>Conducted daily stand-ups, sprint planning, and facilitated cross-functional collaboration for timely delivery</p>
+          </div>
         </div>
         <div class="experience-item">
-          Coordinated integration deliverables across multiple departments, ensuring clear stakeholder communication throughout project lifecycle
+          <div class="experience-item-icon">📄</div>
+          <div class="experience-item-content">
+            <h4>Documentation</h4>
+            <p>Authored technical documentation, process workflows, and integration test reports for compliance</p>
+          </div>
         </div>
         <div class="experience-item">
-          Facilitated knowledge transfer and team onboarding while participating in technical and community events
+          <div class="experience-item-icon">🔍</div>
+          <div class="experience-item-content">
+            <h4>Debugging & Optimization</h4>
+            <p>Resolved cross-system communication issues by analyzing hardware/software interactions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">Projects</p>
+      <h2 class="section-title">Applied Skills in Action</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-icon">📊</div>
+        <h3 class="project-title">Sales Performance Dashboard</h3>
+        <p class="project-description">Interactive Power BI dashboard analyzing regional sales data, KPIs including revenue, margins, and performance trends for data-driven decision making.</p>
+        <div class="project-tags">
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">Excel</span>
+          <span class="project-tag">Data Visualization</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-icon">🔄</div>
+        <h3 class="project-title">Process Optimization Study</h3>
+        <p class="project-description">Mapped and analyzed student enrollment process using BPMN diagrams, identified bottlenecks, and proposed digital automation solutions.</p>
+        <div class="project-tags">
+          <span class="project-tag">BPMN</span>
+          <span class="project-tag">Process Mapping</span>
+          <span class="project-tag">Automation</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-icon">📉</div>
+        <h3 class="project-title">Customer Churn Analysis</h3>
+        <p class="project-description">E-commerce customer churn analysis identifying at-risk segments and retention opportunities using SQL queries and Excel analytics.</p>
+        <div class="project-tags">
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">Excel</span>
+          <span class="project-tag">Predictive Analytics</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-icon">💰</div>
+        <h3 class="project-title">Financial Forecasting Model</h3>
+        <p class="project-description">Built financial forecasting models to predict quarterly revenues and expenses, improving accuracy for strategic planning.</p>
+        <div class="project-tags">
+          <span class="project-tag">Excel</span>
+          <span class="project-tag">Financial Modeling</span>
+          <span class="project-tag">Forecasting</span>
         </div>
       </div>
     </div>
@@ -1142,94 +1697,161 @@
   <!-- Skills Section -->
   <section id="skills" class="section skills">
     <div class="section-header reveal">
-      <p class="section-label">Skills & Expertise</p>
-      <h2 class="section-title">What I Bring to the Table</h2>
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">Technical Toolkit</h2>
     </div>
-    <div class="skills-grid">
+    <div class="skills-mega-grid">
       <div class="skill-category reveal">
-        <h3 class="skill-category-title">
+        <div class="skill-category-header">
           <span class="skill-category-icon">💻</span>
-          Programming
-        </h3>
+          <h3 class="skill-category-title">Programming & Development</h3>
+        </div>
         <div class="skill-bars">
           <div class="skill-bar">
             <div class="skill-bar-header">
               <span class="skill-bar-name">Python</span>
-              <span class="skill-bar-percent">85%</span>
+              <span class="skill-bar-percent">90%</span>
             </div>
             <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-width="85"></div>
+              <div class="skill-bar-fill gradient-1" data-width="90"></div>
             </div>
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header">
               <span class="skill-bar-name">SQL</span>
-              <span class="skill-bar-percent">80%</span>
+              <span class="skill-bar-percent">85%</span>
             </div>
             <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-width="80"></div>
+              <div class="skill-bar-fill gradient-1" data-width="85"></div>
             </div>
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header">
-              <span class="skill-bar-name">HTML5 & CSS3</span>
+              <span class="skill-bar-name">Embedded C</span>
               <span class="skill-bar-percent">75%</span>
             </div>
             <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-width="75"></div>
+              <div class="skill-bar-fill gradient-1" data-width="75"></div>
             </div>
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header">
-              <span class="skill-bar-name">C</span>
-              <span class="skill-bar-percent">70%</span>
+              <span class="skill-bar-name">Qiskit (Quantum)</span>
+              <span class="skill-bar-percent">60%</span>
             </div>
             <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-width="70"></div>
+              <div class="skill-bar-fill gradient-1" data-width="60"></div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="skill-category reveal">
-        <h3 class="skill-category-title">
-          <span class="skill-category-icon">🛠️</span>
-          Tools & Software
-        </h3>
+        <div class="skill-category-header">
+          <span class="skill-category-icon">🛡️</span>
+          <h3 class="skill-category-title">Cybersecurity & Networking</h3>
+        </div>
         <div class="skill-tags">
-          <span class="skill-tag">Visual Studio Code</span>
-          <span class="skill-tag">PyCharm</span>
-          <span class="skill-tag">Microsoft Office</span>
-          <span class="skill-tag">SPSS</span>
-          <span class="skill-tag">SAS</span>
           <span class="skill-tag">Wireshark</span>
-          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Nmap</span>
+          <span class="skill-tag">Nessus</span>
+          <span class="skill-tag">Metasploit</span>
+          <span class="skill-tag">SIEM</span>
+          <span class="skill-tag">IDS/IPS</span>
+          <span class="skill-tag">TLS/PKI</span>
+          <span class="skill-tag">OpenSSL</span>
+          <span class="skill-tag">Penetration Testing</span>
+          <span class="skill-tag">Digital Forensics</span>
+          <span class="skill-tag">Incident Response</span>
+          <span class="skill-tag">Malware Analysis</span>
         </div>
       </div>
+
       <div class="skill-category reveal">
-        <h3 class="skill-category-title">
+        <div class="skill-category-header">
+          <span class="skill-category-icon">☁️</span>
+          <h3 class="skill-category-title">Cloud & DevOps</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS (S3, EC2, Lambda, Redshift)</span>
+          <span class="skill-tag">Microsoft Azure</span>
+          <span class="skill-tag">Google Cloud Platform</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Cloud Security</span>
+          <span class="skill-tag">IAM</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal">
+        <div class="skill-category-header">
           <span class="skill-category-icon">📊</span>
-          Methodologies
-        </h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Agile & Scrum</span>
-          <span class="skill-tag">Risk Management</span>
-          <span class="skill-tag">Project Management</span>
-          <span class="skill-tag">Stakeholder Communication</span>
-          <span class="skill-tag">Vendor Management</span>
+          <h3 class="skill-category-title">Data & Analytics</h3>
+        </div>
+        <div class="skill-bars">
+          <div class="skill-bar">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Power BI</span>
+              <span class="skill-bar-percent">80%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill gradient-2" data-width="80"></div>
+            </div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Tableau</span>
+              <span class="skill-bar-percent">75%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill gradient-2" data-width="75"></div>
+            </div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Pandas / NumPy</span>
+              <span class="skill-bar-percent">85%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill gradient-2" data-width="85"></div>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="skill-category reveal">
-        <h3 class="skill-category-title">
-          <span class="skill-category-icon">🎯</span>
-          Core Strengths
-        </h3>
+        <div class="skill-category-header">
+          <span class="skill-category-icon">🤖</span>
+          <h3 class="skill-category-title">ML & AI for Security</h3>
+        </div>
         <div class="skill-tags">
-          <span class="skill-tag">Problem Solving</span>
-          <span class="skill-tag">Data Analytics</span>
-          <span class="skill-tag">Team Leadership</span>
-          <span class="skill-tag">Conflict Resolution</span>
-          <span class="skill-tag">Knowledge Transfer</span>
-          <span class="skill-tag">Time Management</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Adversarial ML</span>
+          <span class="skill-tag">Fraud Detection</span>
+          <span class="skill-tag">Threat Intelligence</span>
+          <span class="skill-tag">UEBA</span>
+          <span class="skill-tag">Phishing Detection</span>
+          <span class="skill-tag">Secure AI</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal">
+        <div class="skill-category-header">
+          <span class="skill-category-icon">🛠️</span>
+          <h3 class="skill-category-title">Tools & Methods</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">PyCharm</span>
+          <span class="skill-tag">Vector CANoe</span>
+          <span class="skill-tag">CANalyzer</span>
+          <span class="skill-tag">Splunk</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">Secure SDLC</span>
+          <span class="skill-tag">BPMN</span>
         </div>
       </div>
     </div>
@@ -1239,60 +1861,81 @@
   <section id="education" class="section">
     <div class="section-header reveal">
       <p class="section-label">Education</p>
-      <h2 class="section-title">Academic Background</h2>
+      <h2 class="section-title">Academic Foundation</h2>
     </div>
     <div class="education-grid">
       <div class="education-card reveal">
         <div class="education-icon">🎓</div>
-        <h3 class="education-degree">Master of Science in Information Systems</h3>
+        <h3 class="education-degree">M.S. Information Systems</h3>
         <p class="education-school">California State University, Long Beach</p>
-        <p class="education-details">California, USA • Current</p>
+        <p class="education-details">California, USA • Expected May 2026</p>
+        <div class="education-coursework">
+          <h4>Relevant Coursework</h4>
+          <div class="coursework-tags">
+            <span class="coursework-tag">AI for Cybersecurity</span>
+            <span class="coursework-tag">Intrusion Detection</span>
+            <span class="coursework-tag">Adversarial ML</span>
+            <span class="coursework-tag">Cryptography</span>
+            <span class="coursework-tag">Ethical Hacking</span>
+            <span class="coursework-tag">Business Intelligence</span>
+            <span class="coursework-tag">Distributed Systems</span>
+          </div>
+        </div>
       </div>
       <div class="education-card reveal">
         <div class="education-icon">📚</div>
-        <h3 class="education-degree">Bachelor of Science in Electronics & Communication Engineering</h3>
+        <h3 class="education-degree">B.S. Electronics & Communication Engineering</h3>
         <p class="education-school">Dr. Ambedkar Institute of Technology</p>
-        <p class="education-details">Bengaluru, India • GPA: 3.3</p>
+        <p class="education-details">Bengaluru, India • Aug 2022</p>
+        <div class="education-coursework">
+          <h4>Foundation</h4>
+          <div class="coursework-tags">
+            <span class="coursework-tag">Digital Systems</span>
+            <span class="coursework-tag">Embedded Systems</span>
+            <span class="coursework-tag">Signal Processing</span>
+            <span class="coursework-tag">Communication Networks</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Achievements Section -->
-  <section id="achievements" class="section achievements">
+  <!-- Publications Section -->
+  <section id="publications" class="section publications">
     <div class="section-header reveal">
-      <p class="section-label">Publications</p>
-      <h2 class="section-title">Research & Publications</h2>
+      <p class="section-label">Research</p>
+      <h2 class="section-title">Published Work</h2>
     </div>
-    <div class="achievements-grid">
-      <div class="achievement-card reveal">
-        <div class="achievement-icon">📜</div>
-        <h3 class="achievement-title">Development of Computational System Using Quantum Computing</h3>
-        <p class="achievement-meta">Volume 11 Issue 8 • August 2024</p>
-        <a href="https://drive.google.com/file/d/13avRGjhhHd6NIEaye5rYvz0sq7okWkpq/view?usp=sharing" target="_blank" class="achievement-link">
+    <div class="publications-grid">
+      <div class="publication-card reveal">
+        <span class="publication-year">Aug 2024</span>
+        <h3 class="publication-title">Development of Computational System Using Quantum Computing</h3>
+        <p class="publication-journal">Volume 11, Issue 8 — Explored computational models for fault-tolerant design and optimization</p>
+        <a href="https://drive.google.com/file/d/13avRGjhhHd6NIEaye5rYvz0sq7okWkpq/view?usp=sharing" target="_blank" class="publication-link">
           View Certificate →
         </a>
       </div>
-      <div class="achievement-card reveal">
-        <div class="achievement-icon">📜</div>
-        <h3 class="achievement-title">Traffic Control Management System Using Inductive Loop Sensor</h3>
-        <p class="achievement-meta">IRJET Volume 10 Issue 9 • September 2023</p>
-        <a href="https://drive.google.com/file/d/1Tr2Cq4S9jBt9jRnrXMXIiLXfEaLPX4jE/view?usp=sharing" target="_blank" class="achievement-link">
+      <div class="publication-card reveal">
+        <span class="publication-year">Sept 2023</span>
+        <h3 class="publication-title">Traffic Control Management System Using Inductive Loop Sensor</h3>
+        <p class="publication-journal">IRJET Vol 10, Issue 9 — Built reliable, sensor-driven distributed control framework</p>
+        <a href="https://drive.google.com/file/d/1Tr2Cq4S9jBt9jRnrXMXIiLXfEaLPX4jE/view?usp=sharing" target="_blank" class="publication-link">
           View Certificate →
         </a>
       </div>
-      <div class="achievement-card reveal">
-        <div class="achievement-icon">📜</div>
-        <h3 class="achievement-title">Optimized Waste Management System</h3>
-        <p class="achievement-meta">IRJET Volume 10 Issue 9 • September 2023</p>
-        <a href="https://drive.google.com/file/d/1oq4YSziN2eINJaeTWArYRzcg4acmlx_T/view?usp=sharing" target="_blank" class="achievement-link">
+      <div class="publication-card reveal">
+        <span class="publication-year">Sept 2023</span>
+        <h3 class="publication-title">Optimized Waste Management System</h3>
+        <p class="publication-journal">IRJET Vol 10, Issue 9 — Applied ML to improve reliability of urban IoT operations</p>
+        <a href="https://drive.google.com/file/d/1oq4YSziN2eINJaeTWArYRzcg4acmlx_T/view?usp=sharing" target="_blank" class="publication-link">
           View Certificate →
         </a>
       </div>
-      <div class="achievement-card reveal">
-        <div class="achievement-icon">📜</div>
-        <h3 class="achievement-title">Blockchain Implementation in Educational System</h3>
-        <p class="achievement-meta">Volume 9 Issue 7 • July 2022</p>
-        <a href="https://drive.google.com/file/d/1-hMkSPntjCzvNKKlgJeWWDSIkHgP_Bol/view?usp=sharing" target="_blank" class="achievement-link">
+      <div class="publication-card reveal">
+        <span class="publication-year">July 2022</span>
+        <h3 class="publication-title">Blockchain Implementation in Educational System</h3>
+        <p class="publication-journal">Volume 9, Issue 7 — Designed secure, fault-tolerant distributed ledger system</p>
+        <a href="https://drive.google.com/file/d/1-hMkSPntjCzvNKKlgJeWWDSIkHgP_Bol/view?usp=sharing" target="_blank" class="publication-link">
           View Certificate →
         </a>
       </div>
@@ -1303,29 +1946,29 @@
   <section id="activities" class="section">
     <div class="section-header reveal">
       <p class="section-label">Beyond Work</p>
-      <h2 class="section-title">Extracurricular Activities</h2>
+      <h2 class="section-title">Community & Leadership</h2>
     </div>
-    <div class="activities-list">
-      <div class="activity-item reveal">
+    <div class="activities-grid">
+      <div class="activity-card reveal">
+        <div class="activity-icon">💼</div>
+        <div class="activity-content">
+          <h4>Job Fair Volunteer</h4>
+          <p>Engineering & Technical Job Fair, Sept 2024</p>
+          <a href="https://drive.google.com/file/d/14Mh-rRfgZZCDD0RUQhl7kDk_XuUWtoaO/view?usp=sharing" target="_blank">View Certificate →</a>
+        </div>
+      </div>
+      <div class="activity-card reveal">
         <div class="activity-icon">🎪</div>
         <div class="activity-content">
-          <h4>Fit.Fest 2023 Volunteer</h4>
+          <h4>Fit.Fest 2023</h4>
           <p>Volunteered at BGSW's annual fitness festival during employment</p>
         </div>
       </div>
-      <div class="activity-item reveal">
+      <div class="activity-card reveal">
         <div class="activity-icon">🎭</div>
         <div class="activity-content">
-          <h4>Cultural & Academic Fest Organizer</h4>
-          <p>Organized fests during bachelor's program for two consecutive years</p>
-        </div>
-      </div>
-      <div class="activity-item reveal">
-        <div class="activity-icon">💼</div>
-        <div class="activity-content">
-          <h4>Engineering & Technical Job Fair Volunteer</h4>
-          <p>September 18, 2024</p>
-          <a href="https://drive.google.com/file/d/14Mh-rRfgZZCDD0RUQhl7kDk_XuUWtoaO/view?usp=sharing" target="_blank">View Certificate →</a>
+          <h4>Fest Organizer</h4>
+          <p>Organized cultural & academic fests for 2 consecutive years during undergrad</p>
         </div>
       </div>
     </div>
@@ -1335,16 +1978,16 @@
   <section id="contact" class="section contact">
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <h3>Let's Work Together</h3>
-        <p>I'm currently seeking opportunities to apply my skills in information systems, data analysis, and software development. Open to internships and full-time positions.</p>
+        <h3>Let's Build Something Together</h3>
+        <p>Looking for a technology professional who understands code, security, and business? I'd love to connect.</p>
         <div class="contact-methods">
           <a href="mailto:arakalgudmaheshsurya@gmail.com" class="contact-method">
             <span class="contact-method-icon">✉️</span>
             <span>arakalgudmaheshsurya@gmail.com</span>
           </a>
-          <a href="tel:+16262928675" class="contact-method">
+          <a href="tel:+15625426976" class="contact-method">
             <span class="contact-method-icon">📱</span>
-            <span>+1 (626) 292-8675</span>
+            <span>+1 (562) 542-6976</span>
           </a>
           <a href="https://www.linkedin.com/in/surya-am" target="_blank" class="contact-method">
             <span class="contact-method-icon">💼</span>
@@ -1353,10 +1996,10 @@
         </div>
       </div>
       <div class="contact-cta reveal">
-        <h3>Ready to Connect?</h3>
-        <p>Whether you have a question, opportunity, or just want to say hello — I'd love to hear from you!</p>
+        <h3>Open to Opportunities</h3>
+        <p>Seeking roles where I can leverage my cross-functional expertise in software engineering, cybersecurity, and business analysis.</p>
         <a href="mailto:arakalgudmaheshsurya@gmail.com" class="btn-primary">
-          <span>✉️</span> Send Me an Email
+          ✉️ Get in Touch
         </a>
       </div>
     </div>
@@ -1367,12 +2010,12 @@
     <div class="footer-content">
       <div class="footer-logo">S<span>.</span>AM</div>
       <div class="footer-links">
-        <a href="#about">About</a>
+        <a href="#value">What I Do</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </div>
-      <p class="footer-copy">© 2024 Surya Arakalgud Mahesh. All Rights Reserved.</p>
+      <p class="footer-copy">© 2024 Surya Arakalgud Mahesh</p>
     </div>
   </footer>
 
@@ -1395,6 +2038,20 @@
       }
     });
 
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+
     // Reveal Animations
     const observerOptions = {
       threshold: 0.1,
@@ -1406,16 +2063,14 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           
-          // Animate skill bars when visible
-          if (entry.target.classList.contains('skill-category')) {
-            const bars = entry.target.querySelectorAll('.skill-bar-fill');
-            bars.forEach(bar => {
-              const width = bar.getAttribute('data-width');
-              setTimeout(() => {
-                bar.style.width = width + '%';
-              }, 200);
-            });
-          }
+          // Animate skill bars
+          const bars = entry.target.querySelectorAll('.skill-bar-fill');
+          bars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            setTimeout(() => {
+              bar.style.width = width + '%';
+            }, 200);
+          });
         }
       });
     }, observerOptions);
@@ -1424,7 +2079,7 @@
       observer.observe(el);
     });
 
-    // Smooth scroll for anchor links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1438,13 +2093,21 @@
       });
     });
 
-    // Stagger animation for cards
-    document.querySelectorAll('.achievements-grid .achievement-card').forEach((card, index) => {
+    // Stagger animations
+    document.querySelectorAll('.value-card').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.15}s`;
+    });
+
+    document.querySelectorAll('.publication-card').forEach((card, index) => {
       card.style.transitionDelay = `${index * 0.1}s`;
     });
 
-    document.querySelectorAll('.skills-grid .skill-category').forEach((card, index) => {
+    document.querySelectorAll('.project-card').forEach((card, index) => {
       card.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    document.querySelectorAll('.skill-category').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.08}s`;
     });
   </script>
 </body>
