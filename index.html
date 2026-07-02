@@ -1,2050 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surya Arakalgud Mahesh | Software Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Updated color palette to match purple tie/pocket square */
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #110f18;
-      --bg-card: #1a1722;
-      --bg-card-hover: #242030;
-      --accent: #a78bfa;
-      --accent-dim: #a78bfa25;
-      --accent-glow: #a78bfa50;
-      --accent-bright: #c4b5fd;
-      --accent-2: #818cf8;
-      --accent-2-dim: #818cf825;
-      --accent-3: #f472b6;
-      --accent-3-dim: #f472b625;
-      --text-primary: #f0f0f5;
-      --text-secondary: #9898a8;
-      --text-muted: #606070;
-      --border: #2a2835;
-      --gradient-1: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
-      --gradient-2: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
-      --gradient-3: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    ::selection {
-      background: var(--accent);
-      color: var(--bg-primary);
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-dim);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent);
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: var(--gradient-1);
-      z-index: 9999;
-      transition: width 0.1s ease;
-    }
-
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 1.5rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .nav.scrolled {
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(20px);
-      padding: 1rem 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-logo span {
-      color: var(--accent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      font-family: var(--font-body);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .nav-cta:hover {
-      background: var(--accent);
-      color: var(--bg-primary);
-      box-shadow: 0 0 30px var(--accent-glow);
-    }
-
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 1001;
-      background: none;
-      border: none;
-    }
-
-    .menu-toggle span {
-      width: 25px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg-primary);
-      z-index: 999;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .mobile-menu.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .mobile-menu a {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .mobile-menu a:hover {
-      color: var(--accent);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 0 3rem;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-    }
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.3;
-      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
-      top: 50%;
-      right: 10%;
-      transform: translateY(-50%);
-      animation: pulse 8s ease-in-out infinite;
-    }
-
-    .hero-glow-2 {
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, var(--accent-3-dim) 0%, transparent 70%);
-      bottom: 10%;
-      left: 5%;
-      animation: pulse 10s ease-in-out infinite reverse;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
-      50% { opacity: 0.8; transform: translateY(-50%) scale(1.1); }
-    }
-
-    .hero-content {
-      max-width: 900px;
-      z-index: 1;
-    }
-
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
-    }
-
-    .hero-label .dot {
-      width: 8px;
-      height: 8px;
-      background: #4ade80;
-      border-radius: 50%;
-      animation: blink 2s ease-in-out infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.8s ease 0.1s forwards;
-      opacity: 0;
-    }
-
-    .hero-title .gradient {
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      max-width: 750px;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 0.8s ease 0.2s forwards;
-      opacity: 0;
-    }
-
-    .hero-subtitle strong {
-      color: var(--text-primary);
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.8s ease 0.3s forwards;
-      opacity: 0;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      background: var(--accent);
-      color: var(--bg-primary);
-      font-family: var(--font-body);
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px var(--accent-glow);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      background: transparent;
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-weight: 600;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 4rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--border);
-      animation: fadeInUp 0.8s ease 0.4s forwards;
-      opacity: 0;
-      flex-wrap: wrap;
-    }
-
-    .stat {
-      text-align: left;
-    }
-
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Section Styles */
-    .section {
-      padding: 7rem 3rem;
-      position: relative;
-    }
-
-    .section-header {
-      max-width: 700px;
-      margin-bottom: 4rem;
-    }
-
-    .section-header.center {
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-label {
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .section-subtitle {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-top: 1rem;
-    }
-
-    /* Value Proposition Section */
-    .value-prop {
-      background: var(--bg-secondary);
-    }
-
-    .value-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .value-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-
-    .value-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--card-gradient);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .value-card:hover {
-      border-color: transparent;
-      transform: translateY(-8px);
-    }
-
-    .value-card:hover::before {
-      opacity: 1;
-    }
-
-    .value-card:nth-child(1) { --card-gradient: var(--gradient-1); }
-    .value-card:nth-child(2) { --card-gradient: var(--gradient-2); }
-    .value-card:nth-child(3) { --card-gradient: var(--gradient-3); }
-
-    .value-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .value-card:nth-child(1) .value-icon {
-      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2) 0%, rgba(129, 140, 248, 0.2) 100%);
-    }
-
-    .value-card:nth-child(2) .value-icon {
-      background: linear-gradient(135deg, rgba(129, 140, 248, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
-    }
-
-    .value-card:nth-child(3) .value-icon {
-      background: linear-gradient(135deg, rgba(244, 114, 182, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
-    }
-
-    .value-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .value-description {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      line-height: 1.7;
-    }
-
-    .value-skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .value-skill {
-      padding: 0.4rem 0.8rem;
-      background: var(--bg-secondary);
-      border-radius: 20px;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
-
-    /* About Section */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .about-visual {
-      position: relative;
-    }
-
-    .about-image-wrapper {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .about-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 20px;
-      filter: grayscale(10%);
-      transition: all 0.4s ease;
-    }
-
-    .about-image-wrapper:hover .about-image {
-      filter: grayscale(0%);
-      transform: scale(1.02);
-    }
-
-    .about-image-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 2px solid var(--accent-dim);
-      border-radius: 20px;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .about-image-wrapper::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 15, 0.8) 100%);
-      border-radius: 20px;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .about-decorator {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border: 2px solid var(--accent);
-      border-radius: 20px;
-      top: 20px;
-      left: 20px;
-      z-index: -1;
-      opacity: 0.5;
-    }
-
-    .about-badges {
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 1rem;
-      z-index: 2;
-    }
-
-    .about-badge {
-      padding: 0.75rem 1.25rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      white-space: nowrap;
-      backdrop-filter: blur(10px);
-    }
-
-    .about-badge span {
-      color: var(--accent);
-    }
-
-    .about-text p {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .about-text p strong {
-      color: var(--text-primary);
-    }
-
-    .about-highlight {
-      display: flex;
-      gap: 1rem;
-      padding: 1.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: 0 12px 12px 0;
-      margin-top: 2rem;
-    }
-
-    .about-highlight-icon {
-      font-size: 1.5rem;
-    }
-
-    .about-highlight-text {
-      color: var(--text-secondary);
-    }
-
-    .about-highlight-text strong {
-      color: var(--accent);
-    }
-
-    /* Experience Section */
-    .experience {
-      background: var(--bg-secondary);
-    }
-
-    .experience-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-
-    .experience-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--gradient-1);
-    }
-
-    .experience-card:hover {
-      border-color: var(--accent-dim);
-    }
-
-    .experience-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .experience-company {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .experience-role {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .experience-duration {
-      background: var(--bg-secondary);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    .experience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .experience-item {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .experience-item:hover {
-      background: var(--bg-card-hover);
-    }
-
-    .experience-item-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--accent-dim);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .experience-item-content h4 {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .experience-item-content p {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .experience-metric {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--project-gradient);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover {
-      border-color: var(--accent-dim);
-      transform: translateY(-5px);
-    }
-
-    .project-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .project-card:nth-child(1) { --project-gradient: var(--gradient-1); }
-    .project-card:nth-child(2) { --project-gradient: var(--gradient-2); }
-    .project-card:nth-child(3) { --project-gradient: var(--gradient-3); }
-    .project-card:nth-child(4) { --project-gradient: var(--gradient-1); }
-    .project-card:nth-child(5) { --project-gradient: var(--gradient-2); }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: gap 0.3s ease;
-    }
-
-    .project-link:hover {
-      gap: 0.75rem;
-    }
-
-    .project-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
-      background: var(--accent-dim);
-    }
-
-    .project-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
-      line-height: 1.6;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .project-tag {
-      padding: 0.3rem 0.7rem;
-      background: var(--bg-secondary);
-      border-radius: 15px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    /* Skills Section */
-    .skills {
-      background: var(--bg-secondary);
-    }
-
-    .skills-mega-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .skill-category:hover {
-      border-color: var(--accent-dim);
-    }
-
-    .skill-category-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-category-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--accent-dim);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .skill-category-title {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .skill-bars {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .skill-bar {
-      position: relative;
-    }
-
-    .skill-bar-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.35rem;
-      font-size: 0.8rem;
-    }
-
-    .skill-bar-name {
-      color: var(--text-primary);
-    }
-
-    .skill-bar-percent {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .skill-bar-track {
-      height: 5px;
-      background: var(--bg-secondary);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .skill-bar-fill {
-      height: 100%;
-      border-radius: 3px;
-      width: 0;
-      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .skill-bar-fill.gradient-1 { background: var(--gradient-1); }
-    .skill-bar-fill.gradient-2 { background: var(--gradient-2); }
-    .skill-bar-fill.gradient-3 { background: var(--gradient-3); }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .skill-tag {
-      padding: 0.35rem 0.7rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .skill-tag:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Education Section */
-    .education-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .education-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem;
-      transition: all 0.4s ease;
-    }
-
-    .education-card:hover {
-      border-color: var(--accent-dim);
-      transform: translateY(-5px);
-    }
-
-    .education-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--accent-dim);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .education-degree {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .education-school {
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .education-details {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-
-    .education-coursework {
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .education-coursework h4 {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .coursework-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .coursework-tag {
-      padding: 0.3rem 0.6rem;
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-    }
-
-    /* Publications Section */
-    .publications {
-      background: var(--bg-secondary);
-    }
-
-    .publications-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .publication-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      transition: all 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .publication-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--gradient-1);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .publication-card:hover {
-      border-color: var(--accent-dim);
-      transform: translateY(-5px);
-    }
-
-    .publication-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .publication-year {
-      display: inline-block;
-      padding: 0.25rem 0.7rem;
-      background: var(--accent-dim);
-      border-radius: 15px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      width: fit-content;
-    }
-
-    .publication-title {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-
-    .publication-journal {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .publication-link {
-      margin-top: auto;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: gap 0.3s ease;
-    }
-
-    .publication-link:hover {
-      gap: 0.75rem;
-    }
-
-    /* Activities Section */
-    .activities-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .activity-card {
-      display: flex;
-      gap: 1.25rem;
-      padding: 1.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .activity-card:hover {
-      border-color: var(--accent-dim);
-    }
-
-    .activity-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--accent-dim);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    .activity-content h4 {
-      font-family: var(--font-display);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .activity-content p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .activity-content a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.85rem;
-    }
-
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 4rem;
-    }
-
-    .contact-info h3 {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .contact-info > p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .contact-methods {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .contact-method {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .contact-method:hover {
-      color: var(--accent);
-    }
-
-    .contact-method-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      transition: all 0.3s ease;
-    }
-
-    .contact-method:hover .contact-method-icon {
-      border-color: var(--accent);
-      background: var(--accent-dim);
-    }
-
-    .contact-cta {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .contact-cta h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .contact-cta p {
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
-
-    /* Footer */
-    .footer {
-      padding: 3rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-
-    .footer-logo span {
-      color: var(--accent);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    .footer-copy {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    /* Animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .section {
-        padding: 5rem 2rem;
-      }
-
-      .hero {
-        padding: 0 2rem;
-      }
-
-      .value-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-      }
-
-      .about-visual {
-        max-width: 400px;
-        margin: 0 auto;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav {
-        padding: 1rem 1.5rem;
-      }
-
-      .nav-links, .nav-cta {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-
-      .mobile-menu {
-        display: flex;
-      }
-
-      .hero-title {
-        font-size: 2rem;
-      }
-
-      .hero-stats {
-        gap: 1.5rem;
-      }
-
-      .stat-number {
-        font-size: 2rem;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-      }
-
-      .about-badges {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .experience-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-mega-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Surya Arakalgud Mahesh — AI/ML Engineer with embedded systems roots. From C/C++ on automotive ECUs to production-grade machine learning, Generative AI, and MLOps." />
+  <title>Surya Arakalgud Mahesh — AI/ML Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGE25TF4GP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FGE25TF4GP');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGE25TF4GP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FGE25TF4GP');
+  </script>
 </head>
 <body>
-  <!-- Progress Bar -->
-  <div class="progress-bar" id="progressBar"></div>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">S<span>.</span>AM</a>
-    <ul class="nav-links">
-      <li><a href="#value">What I Do</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li>
-      
-    </ul>
-    <a href="#contact" class="nav-cta">Let's Connect</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <!-- ===== Global Nav (Apple-style frosted bar) ===== -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <nav class="globalnav" id="globalnav">
+    <div class="globalnav-content">
+      <a href="#top" class="globalnav-logo">SAM</a>
+      <ul class="globalnav-list">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#highlights">Highlights</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+      <a href="mailto:suryaarakalgudmahesh@gmail.com" class="globalnav-cta">Contact</a>
+      <button class="globalnav-menu" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#overview">Overview</a>
+      <a href="#highlights">Highlights</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#education">Education</a>
+      <a href="mailto:suryaarakalgudmahesh@gmail.com">Contact</a>
+    </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#value">What I Do</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-      <div class="hero-glow"></div>
-      <div class="hero-glow-2"></div>
+  <!-- ===== Hero ===== -->
+  <header class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
     </div>
     <div class="hero-content">
-      <div class="hero-label">
-        <span class="dot"></span>
-        Open to opportunities
-      </div>
-      <h1 class="hero-title">
-        Building <span class="gradient">Reliable Backend Systems</span><br>
-        for Real-World Impact
-      </h1>
-      <p class="hero-subtitle">
-        I'm <strong>Surya Arakalgud Mahesh</strong> — a <strong>Software Engineer</strong> with 3 years of experience building backend systems and low-level, real-time automotive software. I work across <strong>Python</strong>, <strong>C/C++</strong>, distributed systems, and automation to deliver reliable, fault-tolerant solutions.
+      <p class="hero-eyebrow reveal">AI/ML Engineer</p>
+      <h1 class="hero-title reveal delay-1">Surya<br />Arakalgud Mahesh</h1>
+      <p class="hero-gradient reveal delay-2">From embedded systems to intelligence at scale.</p>
+      <p class="hero-sub reveal delay-3">
+        I started at the hardware–software boundary, writing C/C++ for automotive ECUs at Bosch.
+        Today I architect production-grade machine learning, Generative AI, and MLOps systems
+        for fraud detection, risk modeling, and intelligent decision-making.
       </p>
-      <div class="hero-buttons">
-        <a href="https://docs.google.com/document/d/1aKaCRGQr4On24YaTk2BJHqSfj-I2usIm/edit?usp=sharing&ouid=102350863837734839232&rtpof=true&sd=true" target="_blank" class="btn-primary">
-          📄 Download Resume
-        </a>
-        <a href="#value" class="btn-secondary">
-          ↓ Explore My Work
-        </a>
+      <div class="hero-actions reveal delay-4">
+        <a href="#experience" class="btn btn-primary">Explore my work</a>
+        <a href="Surya_Arakalgud_Mahesh_Resume.docx" download class="btn btn-link">Download resume <span class="chevron">›</span></a>
+        <a href="mailto:suryaarakalgudmahesh@gmail.com" class="btn btn-link">Get in touch <span class="chevron">›</span></a>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-number">40%</div>
-          <div class="stat-label">ECU Reliability Boost</div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-dot"></div>
+    </div>
+  </header>
+
+  <!-- ===== Overview ===== -->
+  <section class="section section-light" id="overview">
+    <div class="container narrow">
+      <p class="section-eyebrow reveal">Overview</p>
+      <h2 class="section-title reveal">Built at the metal.<br /><span class="text-gradient-blue">Scaled to intelligence.</span></h2>
+      <p class="section-lede reveal">
+        My engineering story began in embedded systems — C/C++ on resource-constrained automotive
+        ECUs, CAN and TCP/IP networking stacks, and root cause analysis across the hardware–software
+        boundary. That systems discipline now powers my work as an AI/ML Engineer: scalable machine
+        learning, deep learning, Generative AI, and MLOps solutions for predictive analytics, fraud
+        detection, risk modeling, and intelligent decision-making — with deep expertise in Python,
+        PyTorch, TensorFlow, LLMs, RAG, Graph Neural Networks, Kubernetes, Spark, Kafka, Snowflake,
+        and cloud-native AI platforms.
+      </p>
+      <div class="journey">
+        <div class="journey-step reveal">
+          <p class="journey-era">2022 — 2024 · Chapter One</p>
+          <h3>Embedded Software Engineer</h3>
+          <p>Bosch Global Software Technologies. C/C++ on automotive ECUs, CAN &amp; TCP/IP stacks, OTA pipelines, fault-tolerant systems.</p>
         </div>
-        <div class="stat">
-          <div class="stat-number">3</div>
-          <div class="stat-label">Years Experience</div>
+        <div class="journey-step reveal delay-1">
+          <p class="journey-era">2024 — 2026 · The Pivot</p>
+          <h3>M.S. Information Systems</h3>
+          <p>California State University, Long Beach. AI systems, applied analytics, software engineering, and data systems.</p>
         </div>
-        <div class="stat">
-          <div class="stat-number">May '26</div>
-          <div class="stat-label">MSIS Graduation</div>
+        <div class="journey-step reveal delay-2">
+          <p class="journey-era">2026 — Now · Chapter Two</p>
+          <h3>AI/ML Engineer</h3>
+          <p>Building production-grade ML, Generative AI, and MLOps systems — fraud detection, RAG, and forecasting. Open to opportunities.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Value Proposition Section -->
-  <section id="value" class="section value-prop">
-    <div class="section-header center reveal">
-      <p class="section-label">What I Bring</p>
-      <h2 class="section-title">Core Strengths</h2>
-      <p class="section-subtitle">A resume-aligned snapshot of the engineering strengths I bring to software and systems roles</p>
-    </div>
-    <div class="value-grid">
-      <div class="value-card reveal">
-        <div class="value-icon">⚙️</div>
-        <h3 class="value-title">Software Engineering</h3>
-        <p class="value-description">
-          I build fault-tolerant, distributed systems. At Bosch, I improved ECU communication reliability by 40% through zonal architecture integration, and led OTA diagnosis automation reducing manual intervention.
-        </p>
-        <div class="value-skills">
-          <span class="value-skill">Python</span>
-          <span class="value-skill">Embedded C</span>
-          <span class="value-skill">Distributed Systems</span>
-          <span class="value-skill">CI/CD</span>
-          <span class="value-skill">Performance Optimization</span>
+  <!-- ===== Highlights (stat ribbon, dark) ===== -->
+  <section class="section section-dark" id="highlights">
+    <div class="container">
+      <p class="section-eyebrow reveal">Highlights</p>
+      <h2 class="section-title on-dark reveal">Numbers that ship.</h2>
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <span class="stat-value text-gradient-warm" data-count="98" data-suffix="%">0</span>
+          <span class="stat-label">phishing detection accuracy in my ML classifier</span>
         </div>
-      </div>
-      <div class="value-card reveal">
-        <div class="value-icon">🛡️</div>
-        <h3 class="value-title">Backend & APIs</h3>
-        <p class="value-description">
-          I develop backend services and RESTful APIs in Python, improve response times through query and processing optimization, and build maintainable services that work reliably in distributed environments.
-        </p>
-        <div class="value-skills">
-          <span class="value-skill">Python</span>
-          <span class="value-skill">REST APIs</span>
-          <span class="value-skill">PostgreSQL</span>
-          <span class="value-skill">MySQL</span>
-          <span class="value-skill">Microservices</span>
-          <span class="value-skill">Query Tuning</span>
+        <div class="stat reveal delay-1">
+          <span class="stat-value text-gradient-warm" data-count="60" data-suffix="%">0</span>
+          <span class="stat-label">reduction in manual debugging effort at Bosch</span>
         </div>
-      </div>
-      <div class="value-card reveal">
-        <div class="value-icon">📊</div>
-        <h3 class="value-title">Automation & Diagnostics</h3>
-        <p class="value-description">
-          I automate debugging and OTA diagnostic workflows, strengthen CI/CD processes, and help teams move faster by improving observability, issue resolution, and release readiness.
-        </p>
-        <div class="value-skills">
-          <span class="value-skill">CI/CD</span>
-          <span class="value-skill">Debugging</span>
-          <span class="value-skill">Logging</span>
-          <span class="value-skill">Monitoring</span>
-          <span class="value-skill">OTA Systems</span>
-          <span class="value-skill">Automation</span>
+        <div class="stat reveal delay-2">
+          <span class="stat-value text-gradient-warm" data-count="40" data-suffix="%">0</span>
+          <span class="stat-label">gain in ECU communication reliability</span>
+        </div>
+        <div class="stat reveal delay-3">
+          <span class="stat-value text-gradient-warm" data-count="30" data-suffix="%">0</span>
+          <span class="stat-label">faster incident resolution across distributed systems</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="about-content">
-      <div class="about-visual reveal">
-        <div class="about-image-wrapper">
-          <img src="IMG_8005.jpg" alt="Surya Arakalgud Mahesh" class="about-image">
+  <!-- ===== Experience ===== -->
+  <section class="section section-gray" id="experience">
+    <div class="container">
+      <p class="section-eyebrow reveal">Professional Experience</p>
+      <h2 class="section-title reveal">Where the work happened.</h2>
+
+      <article class="xp-card reveal">
+        <div class="xp-head">
+          <div>
+            <h3 class="xp-role">Embedded Software Engineer</h3>
+            <p class="xp-org">Bosch Global Software Technologies · India</p>
+          </div>
+          <span class="xp-date">Sep 2022 — Aug 2024</span>
         </div>
-        <div class="about-decorator"></div>
-        <div class="about-badges">
-          <div class="about-badge">🎓 <span>MSIS</span> May '26</div>
-          <div class="about-badge">💼 <span>Software Engineer</span></div>
+        <ul class="xp-list">
+          <li>Developed C/C++ and Python software for embedded OTA and diagnostic pipelines on Linux, implementing fault triage logic and structured execution tracing on resource-constrained ECUs — reducing manual debugging effort by <strong>60%</strong>.</li>
+          <li>Designed and deployed a fault management module on memory- and power-constrained ECUs, combining rule-based logic with anomaly detection for fault-tolerant, self-recovering behavior — owned end-to-end from requirements to production release.</li>
+          <li>Built performance validation and observability frameworks for distributed ECU systems — regression pipelines, latency/stability KPIs, and structured logging — improving incident resolution time by <strong>30%</strong> and system stability by <strong>20%</strong>.</li>
+          <li>Architected backend services and RESTful APIs in Python with state synchronization across distributed ECU nodes over TCP/IP, reducing data exchange latency by <strong>15%</strong> through protocol-level optimizations.</li>
+          <li>Optimized C/C++ on resource-limited ECUs for memory footprint, CPU, and power; integrated secure communication layers (TLS/PKI) at the hardware–software interface.</li>
+          <li>Diagnosed and resolved cross-system networking failures across CAN bus and TCP/IP stacks through deep trace and packet-level analysis, improving ECU communication reliability by <strong>40%</strong>.</li>
+        </ul>
+        <div class="xp-tags">
+          <span>C/C++</span><span>Python</span><span>Linux</span><span>CAN Bus</span><span>TCP/IP</span><span>OTA</span><span>TLS/PKI</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Skills (bento grid) ===== -->
+  <section class="section section-light" id="skills">
+    <div class="container">
+      <p class="section-eyebrow reveal">Core Competencies</p>
+      <h2 class="section-title reveal">A full-stack AI toolkit,<br /><span class="text-gradient-blue">grounded in systems engineering.</span></h2>
+      <div class="bento">
+        <div class="bento-card bento-wide reveal">
+          <span class="bento-icon">🧠</span>
+          <h3>Machine Learning &amp; Deep Learning</h3>
+          <p>Scikit-Learn · XGBoost · LightGBM · CatBoost · Random Forest · Logistic Regression · TensorFlow · PyTorch · Autoencoders · Isolation Forest · Gradient Boosting · Deep Neural Networks</p>
+        </div>
+        <div class="bento-card reveal delay-1">
+          <span class="bento-icon">✨</span>
+          <h3>Generative AI &amp; LLM Engineering</h3>
+          <p>Llama 3 · Mistral · RAG · LangChain · LangGraph · Agentic AI · Prompt Engineering · AI Copilots · LLM Fine-Tuning &amp; Evaluation · Synthetic Data</p>
+        </div>
+        <div class="bento-card reveal delay-2">
+          <span class="bento-icon">🕸️</span>
+          <h3>Graph AI &amp; Advanced Systems</h3>
+          <p>Graph Neural Networks · PyTorch Geometric · Knowledge Graphs · Recommendation Systems · Temporal Fusion Transformers · Multimodal AI</p>
+        </div>
+        <div class="bento-card reveal">
+          <span class="bento-icon">⚡</span>
+          <h3>Data Engineering &amp; Streaming</h3>
+          <p>Apache Spark · Spark Structured Streaming · Apache Kafka · ETL Pipelines · Feature Engineering · Data Validation · Real-Time Pipelines</p>
+        </div>
+        <div class="bento-card bento-wide reveal delay-1">
+          <span class="bento-icon">🚀</span>
+          <h3>MLOps, Deployment &amp; Monitoring</h3>
+          <p>MLflow · Kubeflow · Apache Airflow · Kubernetes · KServe · NVIDIA Triton · FastAPI · Flask · REST APIs · CI/CD · GitHub Actions · ML Observability · WhyLabs · Evidently AI</p>
+        </div>
+        <div class="bento-card reveal delay-2">
+          <span class="bento-icon">☁️</span>
+          <h3>Cloud &amp; Vector Databases</h3>
+          <p>AWS (EC2, S3) · Snowflake · Databricks · Redis · Feast Feature Store · Pinecone · Weaviate · Vector Search · Distributed Training</p>
+        </div>
+        <div class="bento-card reveal">
+          <span class="bento-icon">🔧</span>
+          <h3>Embedded Systems Foundation</h3>
+          <p>C/C++ · Linux Kernel · CAN Bus · TCP/IP · Device Drivers · gdb / perf / ftrace · RTOS Concepts · OTA Pipelines · TLS/PKI · Real-Time Constraints</p>
+        </div>
+        <div class="bento-card reveal delay-1">
+          <span class="bento-icon">📊</span>
+          <h3>Visualization &amp; Responsible AI</h3>
+          <p>Power BI · Tableau · Streamlit · SHAP · LIME · Explainable AI · Responsible AI · AI Governance · Risk Analytics · Python · SQL · Bash · Git · Agile</p>
         </div>
       </div>
-      <div class="about-text reveal">
-        <div class="section-header">
-          <p class="section-label">About Me</p>
-          <h2 class="section-title">Engineering Focused on Reliability</h2>
-        </div>
-        <p>
-          I'm pursuing my <strong>Master of Science in Information Systems</strong> at California State University, Long Beach. Professionally, I have <strong>3 years of experience</strong> building backend systems and low-level automotive software across Python, C, APIs, distributed debugging, and automation.
-        </p>
-        <p>
-          My background includes backend services, RESTful APIs, database optimization, ECU communication, CAN and TCP/IP troubleshooting, and fault-tolerant system design. I focus on building software that is stable, maintainable, and effective under real production constraints.
-        </p>
-        <p>
-          Whether I'm optimizing response times, diagnosing cross-system failures, or improving release workflows, I bring the same mindset: <strong>build it right, keep it reliable, and make it useful at scale.</strong>
-        </p>
-        <div class="about-highlight">
-          <span class="about-highlight-icon">🚀</span>
-          <p class="about-highlight-text">
-            Recent project work includes a <strong>Phishing Email AI/ML Classifier</strong> and an <strong>Advanced Multimodel AI System</strong>, extending my backend engineering foundation into applied machine learning.
+    </div>
+  </section>
+
+  <!-- ===== Projects (dark, product cards) ===== -->
+  <section class="section section-dark" id="projects">
+    <div class="container">
+      <p class="section-eyebrow reveal">Projects</p>
+      <h2 class="section-title on-dark reveal">Ideas, taken to production.</h2>
+      <div class="project-grid">
+
+        <article class="project-card reveal">
+          <div class="project-glow glow-blue" aria-hidden="true"></div>
+          <p class="project-kicker">Risk Modeling</p>
+          <h3>Credit Default Risk Prediction</h3>
+          <p class="project-desc">
+            End-to-end default prediction pipeline on the Lending Club dataset — XGBoost and
+            LightGBM tuned with Optuna under stratified cross-validation, interpreted with SHAP
+            for regulator-friendly decisions, and served via FastAPI with MLflow tracking and
+            Docker for reproducible, versioned deployment.
           </p>
+          <div class="project-tags">
+            <span>Python</span><span>XGBoost</span><span>LightGBM</span><span>Optuna</span><span>SHAP</span><span>MLflow</span><span>FastAPI</span><span>Docker</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal delay-1">
+          <div class="project-glow glow-green" aria-hidden="true"></div>
+          <p class="project-kicker">Quantitative Finance</p>
+          <h3>Equity Forecasting &amp; Backtesting Engine</h3>
+          <p class="project-desc">
+            LSTM and Temporal Fusion Transformer models in PyTorch for multi-step return
+            prediction over engineered indicators (RSI, MACD, Bollinger Bands), benchmarked
+            against ARIMA with walk-forward validation — plus a vectorized Backtrader engine
+            reporting Sharpe, drawdown, and returns in an interactive Streamlit dashboard.
+          </p>
+          <div class="project-tags">
+            <span>PyTorch</span><span>yfinance</span><span>TFT</span><span>LSTM</span><span>Backtrader</span><span>Streamlit</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal delay-2">
+          <div class="project-glow glow-purple" aria-hidden="true"></div>
+          <p class="project-kicker">Generative AI</p>
+          <h3>Financial Filing Intelligence</h3>
+          <p class="project-desc">
+            Retrieval-augmented QA over SEC EDGAR filings — LangChain chunking,
+            sentence-transformer embeddings in FAISS, and a locally hosted Llama 3 (Ollama)
+            synthesizing grounded answers with source citations and confidence scoring,
+            evaluated for faithfulness with RAGAS and exposed through FastAPI.
+          </p>
+          <div class="project-tags">
+            <span>LangChain</span><span>FAISS</span><span>Llama 3</span><span>Ollama</span><span>RAGAS</span><span>FastAPI</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-glow glow-blue" aria-hidden="true"></div>
+          <p class="project-kicker">ML Security</p>
+          <h3>Phishing Email AI/ML Classifier</h3>
+          <p class="project-desc">
+            AI-powered phishing email classifier using NLP and logistic regression, trained on
+            real email data with 98% detection accuracy. Ships with a CLI and a Streamlit web
+            app for real-time predictions.
+          </p>
+          <div class="project-tags">
+            <span>Python</span><span>NLP</span><span>Scikit-Learn</span><span>Streamlit</span>
+          </div>
+          <a class="project-link" href="https://github.com/Arakalgudmaheshsurya/Phishing_Email-AI-ML-.git" target="_blank" rel="noopener">View on GitHub ›</a>
+        </article>
+
+        <article class="project-card reveal delay-1">
+          <div class="project-glow glow-green" aria-hidden="true"></div>
+          <p class="project-kicker">Multimodal AI</p>
+          <h3>Advanced Multimodel AI</h3>
+          <p class="project-desc">
+            Multi-model machine learning system exploring ensemble methods and model
+            architectures for improved prediction accuracy and robustness.
+          </p>
+          <div class="project-tags">
+            <span>Python</span><span>Ensemble Methods</span><span>AI</span>
+          </div>
+          <a class="project-link" href="https://github.com/Arakalgudmaheshsurya/advanced-multimodel.git" target="_blank" rel="noopener">View on GitHub ›</a>
+        </article>
+
+        <article class="project-card reveal delay-2">
+          <div class="project-glow glow-purple" aria-hidden="true"></div>
+          <p class="project-kicker">Embedded Era · Networking</p>
+          <h3>Linux Network Data-Path Analyzer</h3>
+          <p class="project-desc">
+            End-to-end data-path analyzer in C and Python using raw socket APIs to inspect
+            L2/L3 packet flows — measuring latency, throughput, and packet loss. Profiling
+            with perf and cProfile cut average packet processing latency by 30%.
+          </p>
+          <div class="project-tags">
+            <span>C</span><span>Python</span><span>Raw Sockets</span><span>perf</span><span>L2/L3</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-glow glow-blue" aria-hidden="true"></div>
+          <p class="project-kicker">Embedded Era · Middleware</p>
+          <h3>Embedded TCP/IP Communication Middleware</h3>
+          <p class="project-desc">
+            Modular TCP/IP middleware in C on Linux — configurable connection backends,
+            session state management, and reliable delivery under latency constraints, with
+            packet trace capture and replay for reproducible debugging. Built with CMake for
+            cross-platform embedded targets.
+          </p>
+          <div class="project-tags">
+            <span>C</span><span>TCP/IP</span><span>Linux</span><span>CMake</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal delay-1">
+          <div class="project-glow glow-green" aria-hidden="true"></div>
+          <p class="project-kicker">Embedded Era · Kernel</p>
+          <h3>Virtual Network Device Driver</h3>
+          <p class="project-desc">
+            Linux kernel module simulating a virtual network device driver — packet Tx/Rx
+            paths, interrupt handling, and DMA-style buffer management — debugged with gdb
+            and kernel trace logs, validating packet integrity and driver-level latency under
+            simulated load.
+          </p>
+          <div class="project-tags">
+            <span>Linux Kernel</span><span>C</span><span>gdb</span><span>Virtual Ethernet</span>
+          </div>
+        </article>
+
+        <article class="project-card reveal delay-2">
+          <div class="project-glow glow-purple" aria-hidden="true"></div>
+          <p class="project-kicker">Embedded Era · Reliability</p>
+          <h3>ECU Fault Injection &amp; Reliability Testing</h3>
+          <p class="project-desc">
+            Fault injection framework simulating CAN bus and TCP/IP communication failures on
+            automotive ECU platforms — benchmarking recovery time, packet loss rate, and
+            system stability under degraded network conditions.
+          </p>
+          <div class="project-tags">
+            <span>Python</span><span>C</span><span>CAN Simulation</span><span>Pytest</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Publications ===== -->
+  <section class="section section-light" id="publications">
+    <div class="container">
+      <p class="section-eyebrow reveal">Publications</p>
+      <h2 class="section-title reveal">Research, peer-reviewed.</h2>
+      <p class="section-lede reveal">Published in IJIERT — International Journal of Innovations in Engineering Research and Technology.</p>
+      <div class="pub-grid">
+        <article class="pub-card spotlight reveal">
+          <div class="pub-top">
+            <span class="pub-badge">IJIERT</span>
+            <span class="pub-date">Aug 2024</span>
+          </div>
+          <h3>Development of Computational System using Quantum Computing</h3>
+          <p class="pub-meta">e-ISSN: 2395-0056 · P-ISSN: 2395-0072</p>
+          <a class="pub-link" href="https://drive.google.com/file/d/13avRGjhhHd6NIEaye5rYvz0sq7okWkpq/view?usp=sharing" target="_blank" rel="noopener">View certificate ›</a>
+        </article>
+        <article class="pub-card spotlight reveal delay-1">
+          <div class="pub-top">
+            <span class="pub-badge">IJIERT</span>
+            <span class="pub-date">Sep 2023</span>
+          </div>
+          <h3>Traffic Control Management System using Inductive Loop Sensor</h3>
+          <p class="pub-meta">Peer-reviewed journal publication</p>
+          <a class="pub-link" href="https://drive.google.com/file/d/1Tr2Cq4S9jBt9jRnrXMXIiLXfEaLPX4jE/view?usp=sharing" target="_blank" rel="noopener">View certificate ›</a>
+        </article>
+        <article class="pub-card spotlight reveal delay-2">
+          <div class="pub-top">
+            <span class="pub-badge">IJIERT</span>
+            <span class="pub-date">Sep 2023</span>
+          </div>
+          <h3>Optimized Waste Management System</h3>
+          <p class="pub-meta">Peer-reviewed journal publication</p>
+          <a class="pub-link" href="https://drive.google.com/file/d/1oq4YSziN2eINJaeTWArYRzcg4acmlx_T/view?usp=sharing" target="_blank" rel="noopener">View certificate ›</a>
+        </article>
+        <article class="pub-card spotlight reveal delay-3">
+          <div class="pub-top">
+            <span class="pub-badge">IJIERT</span>
+            <span class="pub-date">Jul 2022</span>
+          </div>
+          <h3>Blockchain Implementation in Educational System</h3>
+          <p class="pub-meta">Peer-reviewed journal publication</p>
+          <a class="pub-link" href="https://drive.google.com/file/d/1-hMkSPntjCzvNKKlgJeWWDSIkHgP_Bol/view?usp=sharing" target="_blank" rel="noopener">View certificate ›</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Education & Certifications ===== -->
+  <section class="section section-gray" id="education">
+    <div class="container">
+      <div class="edu-grid">
+        <div class="edu-col reveal">
+          <p class="section-eyebrow">Education</p>
+          <h2 class="section-title small">Foundations.</h2>
+          <div class="edu-card">
+            <span class="edu-icon">🎓</span>
+            <div>
+              <h3>Master of Science in Information Systems</h3>
+              <p>California State University, Long Beach · Graduated May 2026</p>
+            </div>
+          </div>
+          <div class="edu-card" style="margin-top: 16px;">
+            <span class="edu-icon">📡</span>
+            <div>
+              <h3>B.Tech, Electronics &amp; Communications Engineering</h3>
+              <p>Dr. Ambedkar Institute of Technology · Bengaluru · 2022</p>
+            </div>
+          </div>
+        </div>
+        <div class="edu-col reveal delay-1">
+          <p class="section-eyebrow">Certifications</p>
+          <h2 class="section-title small">Credentials.</h2>
+          <ul class="cert-list">
+            <li>
+              <span class="cert-badge">Google</span>
+              <div>
+                <strong>AI Professional Certificate</strong>
+                <small>Issued May 2026 · ID 7YZFH1D0KEKO</small>
+              </div>
+            </li>
+            <li>
+              <span class="cert-badge">Google</span>
+              <div>
+                <strong>AI Essentials Specialization</strong>
+                <small>Issued Apr 2026 · ID JDC361TQY8X2</small>
+              </div>
+            </li>
+            <li>
+              <span class="cert-badge">Google</span>
+              <div>
+                <strong>Prompting Essentials Specialization</strong>
+                <small>Issued Feb 2026 · ID LCA709PVFT9N</small>
+              </div>
+            </li>
+            <li>
+              <span class="cert-badge">IBM</span>
+              <div>
+                <strong>AI Fundamentals</strong>
+              </div>
+            </li>
+            <li>
+              <span class="cert-badge">AWS</span>
+              <div>
+                <strong>Certified Machine Learning Engineer — Associate</strong>
+                <small>In progress</small>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience Section -->
-  <section id="experience" class="section experience">
-    <div class="section-header reveal">
-      <p class="section-label">Experience</p>
-      <h2 class="section-title">Professional Journey</h2>
-    </div>
-    <div class="experience-card reveal">
-      <div class="experience-header">
-        <div>
-          <h3 class="experience-company">Bosch Global Software Pvt Ltd</h3>
-          <p class="experience-role">Software Engineer — Automotive Systems</p>
-        </div>
-        <span class="experience-duration">Sep 2022 – Aug 2024</span>
-      </div>
-      <div class="experience-grid">
-        <div class="experience-item">
-          <div class="experience-item-icon">📈</div>
-          <div class="experience-item-content">
-            <h4>Systems Integration</h4>
-            <p>Improved ECU communication reliability by <span class="experience-metric">40%</span> through zonal architecture integration and security protocols</p>
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-item-icon">🛡️</div>
-          <div class="experience-item-content">
-            <h4>Fault Management</h4>
-            <p>Designed and implemented a fault management module in C/Python, enabling fault-tolerant behavior under real-time automotive constraints</p>
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-item-icon">🔄</div>
-          <div class="experience-item-content">
-            <h4>Backend & OTA Automation</h4>
-            <p>Built backend services, RESTful APIs, and automated OTA diagnostic pipelines in Python to improve responsiveness and reduce manual debugging effort</p>
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-item-icon">📋</div>
-          <div class="experience-item-content">
-            <h4>Cross-Functional Delivery</h4>
-            <p>Collaborated with firmware, networking, and validation teams to deliver scalable automotive solutions across embedded and backend systems</p>
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-item-icon">📄</div>
-          <div class="experience-item-content">
-            <h4>Documentation</h4>
-            <p>Maintained technical documentation and supported release cycles, improving team efficiency and onboarding</p>
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-item-icon">🔍</div>
-          <div class="experience-item-content">
-            <h4>Debugging & Optimization</h4>
-            <p>Diagnosed failures across CAN and TCP/IP stacks, improving stability by 20% and reducing incident resolution time by 30%</p>
-          </div>
-        </div>
+  <!-- ===== Contact CTA ===== -->
+  <section class="section section-light cta-section" id="contact">
+    <div class="container narrow center">
+      <h2 class="cta-title reveal"><span class="text-gradient-blue">Let&rsquo;s build something intelligent.</span></h2>
+      <p class="section-lede reveal">Open to AI/ML engineering opportunities and collaborations. Based in Long Beach, CA.</p>
+      <div class="hero-actions reveal">
+        <a href="mailto:suryaarakalgudmahesh@gmail.com" class="btn btn-primary">Email me</a>
+        <a href="tel:+15625426976" class="btn btn-link">+1 (562) 542-6976 <span class="chevron">›</span></a>
+        <a href="https://www.linkedin.com/in/surya-am/" target="_blank" rel="noopener" class="btn btn-link">LinkedIn <span class="chevron">›</span></a>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="section">
-    <div class="section-header reveal">
-      <p class="section-label">Projects</p>
-      <h2 class="section-title">Applied Skills in Action</h2>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <div class="project-icon">⚙️</div>
-        <h3 class="project-title">Backend Services & Diagnostics at Bosch</h3>
-        <p class="project-description">Built Python backend services and RESTful APIs, optimized processing and database logic, and automated OTA diagnostics to improve response times, observability, and debugging efficiency in production environments.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">REST APIs</span>
-          <span class="project-tag">OTA</span>
-          <span class="project-tag">Distributed Systems</span>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">🛡️</div>
-        <h3 class="project-title">Phishing Email AI/ML Classifier</h3>
-        <p class="project-description">An AI-powered phishing email classifier using NLP and logistic regression. Trained on real email data, it detects phishing with 98% accuracy. Includes a CLI and Streamlit web app for real-time predictions.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">NLP</span>
-          <span class="project-tag">Machine Learning</span>
-          <span class="project-tag">Streamlit</span>
-        </div>
-        <a href="https://github.com/Arakalgudmaheshsurya/Phishing_Email-AI-ML-.git" target="_blank" class="project-link">View on GitHub →</a>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">🤖</div>
-        <h3 class="project-title">Advanced Multimodel AI</h3>
-        <p class="project-description">Advanced multi-model machine learning implementation exploring ensemble methods and model architectures for improved prediction accuracy and robustness.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Machine Learning</span>
-          <span class="project-tag">AI</span>
-        </div>
-        <a href="https://github.com/Arakalgudmaheshsurya/advanced-multimodel.git" target="_blank" class="project-link">View on GitHub →</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="section skills">
-    <div class="section-header reveal">
-      <p class="section-label">Skills</p>
-      <h2 class="section-title">Technical Toolkit</h2>
-    </div>
-    <div class="skills-mega-grid">
-      <div class="skill-category reveal">
-        <div class="skill-category-header">
-          <span class="skill-category-icon">💻</span>
-          <h3 class="skill-category-title">Programming & Development</h3>
-        </div>
-        <div class="skill-bars">
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">Python</span>
-              <span class="skill-bar-percent">90%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-1" data-width="90"></div>
-            </div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">Java</span>
-              <span class="skill-bar-percent">80%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-1" data-width="80"></div>
-            </div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">C++</span>
-              <span class="skill-bar-percent">78%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-1" data-width="78"></div>
-            </div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">C</span>
-              <span class="skill-bar-percent">82%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-1" data-width="82"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-category reveal">
-        <div class="skill-category-header">
-          <span class="skill-category-icon">🛡️</span>
-          <h3 class="skill-category-title">Cybersecurity & Networking</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">TLS/PKI</span>
-          <span class="skill-tag">OpenSSL</span>
-          <span class="skill-tag">TCP/IP</span>
-          <span class="skill-tag">CAN Protocol</span>
-          <span class="skill-tag">ECU Communication</span>
-          <span class="skill-tag">Zonal Architecture</span>
-          <span class="skill-tag">Fault Management</span>
-          <span class="skill-tag">OTA Systems</span>
-        </div>
-      </div>
-
-      <div class="skill-category reveal">
-        <div class="skill-category-header">
-          <span class="skill-category-icon">☁️</span>
-          <h3 class="skill-category-title">Cloud & DevOps</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">CI/CD Pipelines</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">Debugging</span>
-          <span class="skill-tag">Logging & Monitoring</span>
-          <span class="skill-tag">Automation</span>
-          <span class="skill-tag">System Integration</span>
-        </div>
-      </div>
-
-      <div class="skill-category reveal">
-        <div class="skill-category-header">
-          <span class="skill-category-icon">📊</span>
-          <h3 class="skill-category-title">Data & Analytics</h3>
-        </div>
-        <div class="skill-bars">
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">PostgreSQL</span>
-              <span class="skill-bar-percent">85%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-2" data-width="85"></div>
-            </div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">MySQL</span>
-              <span class="skill-bar-percent">80%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-2" data-width="80"></div>
-            </div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">SQL Optimization</span>
-              <span class="skill-bar-percent">84%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill gradient-2" data-width="84"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-category reveal">
-        <div class="skill-category-header">
-          <span class="skill-category-icon">🤖</span>
-          <h3 class="skill-category-title">ML & AI for Security</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Scikit-learn</span>
-          <span class="skill-tag">NLP</span>
-          <span class="skill-tag">Logistic Regression</span>
-          <span class="skill-tag">Ensemble Methods</span>
-          <span class="skill-tag">TF-IDF</span>
-          <span class="skill-tag">Feature Engineering</span>
-          <span class="skill-tag">Model Evaluation</span>
-        </div>
-      </div>
-
-      <div class="skill-category reveal">
-        <div class="skill-category-header">
-          <span class="skill-category-icon">🛠️</span>
-          <h3 class="skill-category-title">Tools & Methods</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Streamlit</span>
-          <span class="skill-tag">Pandas</span>
-          <span class="skill-tag">NumPy</span>
-          <span class="skill-tag">Microservices Architecture</span>
-          <span class="skill-tag">Code Reviews</span>
-          <span class="skill-tag">Agile Development</span>
-          <span class="skill-tag">Technical Documentation</span>
-          <span class="skill-tag">Cross-functional Collaboration</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education Section -->
-  <section id="education" class="section">
-    <div class="section-header reveal">
-      <p class="section-label">Education</p>
-      <h2 class="section-title">Academic Foundation</h2>
-    </div>
-    <div class="education-grid">
-      <div class="education-card reveal">
-        <div class="education-icon">🎓</div>
-        <h3 class="education-degree">M.S. Information Systems</h3>
-        <p class="education-school">California State University, Long Beach</p>
-        <p class="education-details">California, USA • Expected May 2026</p>
-        <div class="education-coursework">
-          <h4>Relevant Coursework</h4>
-          <div class="coursework-tags">
-            <span class="coursework-tag">Information Systems</span>
-            <span class="coursework-tag">Software Engineering</span>
-            <span class="coursework-tag">Data Systems</span>
-            <span class="coursework-tag">Applied Analytics</span>
-          </div>
-        </div>
-      </div>
-      <div class="education-card reveal">
-        <div class="education-icon">📚</div>
-        <h3 class="education-degree">B.S. Electronics & Communication Engineering</h3>
-        <p class="education-school">Dr. Ambedkar Institute of Technology</p>
-        <p class="education-details">Bengaluru, India • Aug 2022</p>
-        <div class="education-coursework">
-          <h4>Foundation</h4>
-          <div class="coursework-tags">
-            <span class="coursework-tag">Digital Systems</span>
-            <span class="coursework-tag">Embedded Systems</span>
-            <span class="coursework-tag">Signal Processing</span>
-            <span class="coursework-tag">Communication Networks</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section contact">
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <h3>Let's Build Something Together</h3>
-        <p>Looking for a software engineer with experience in backend systems, APIs, distributed debugging, and automation? I'd love to connect.</p>
-        <div class="contact-methods">
-          <a href="mailto:suryaarakalgudmahesh@gmail.com" class="contact-method">
-            <span class="contact-method-icon">✉️</span>
-            <span>suryaarakalgudmahesh@gmail.com</span>
-          </a>
-          <a href="tel:+15625426976" class="contact-method">
-            <span class="contact-method-icon">📱</span>
-            <span>+1 (562) 542-6976</span>
-          </a>
-          <a href="https://www.linkedin.com/in/surya-am" target="_blank" class="contact-method">
-            <span class="contact-method-icon">💼</span>
-            <span>linkedin.com/in/surya-am</span>
-          </a>
-        </div>
-      </div>
-      <div class="contact-cta reveal">
-        <h3>Open to Opportunities</h3>
-        <p>Seeking software engineering opportunities where I can contribute across backend development, system reliability, and production-grade automation.</p>
-        <a href="mailto:suryaarakalgudmahesh@gmail.com" class="btn-primary">
-          ✉️ Get in Touch
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
+  <!-- ===== Footer ===== -->
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-logo">S<span>.</span>AM</div>
+    <div class="container footer-content">
+      <p>Surya Arakalgud Mahesh · AI/ML Engineer · Long Beach, CA</p>
       <div class="footer-links">
-        <a href="#value">What I Do</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <a href="mailto:suryaarakalgudmahesh@gmail.com">Email</a>
+        <span>·</span>
+        <a href="tel:+15625426976">Phone</a>
+        <span>·</span>
+        <a href="https://www.linkedin.com/in/surya-am/" target="_blank" rel="noopener">LinkedIn</a>
+        <span>·</span>
+        <a href="https://github.com/Arakalgudmaheshsurya" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <p class="footer-copy">© 2026 Surya Arakalgud Mahesh</p>
+      <p class="footer-fine">Designed with precision. Copyright &copy; 2026 Surya Arakalgud Mahesh.</p>
     </div>
   </footer>
 
-  <script>
-    // Progress Bar
-    window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
-      document.getElementById('progressBar').style.width = progress + '%';
-    });
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
-    // Nav Scroll Effect
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('nav');
-      if (window.scrollY > 100) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
-
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-    });
-
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-      });
-    });
-
-    // Reveal Animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          
-          // Animate skill bars
-          const bars = entry.target.querySelectorAll('.skill-bar-fill');
-          bars.forEach(bar => {
-            const width = bar.getAttribute('data-width');
-            setTimeout(() => {
-              bar.style.width = width + '%';
-            }, 200);
-          });
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Stagger animations
-    document.querySelectorAll('.value-card').forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.15}s`;
-    });
-
-    document.querySelectorAll('.publication-card').forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.1}s`;
-    });
-
-    document.querySelectorAll('.project-card').forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.1}s`;
-    });
-
-    document.querySelectorAll('.skill-category').forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.08}s`;
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
