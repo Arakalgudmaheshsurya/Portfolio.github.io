@@ -111,7 +111,7 @@ const navObserver = new IntersectionObserver(
 Object.keys(sectionsById).forEach((id) => navObserver.observe(document.getElementById(id)));
 
 // --- Cursor spotlight on cards ---
-document.querySelectorAll('.bento-card, .project-card, .pub-card').forEach((card) => {
+document.querySelectorAll('.bento-card, .project-card, .pub-card, .path-card').forEach((card) => {
   card.addEventListener('pointermove', (e) => {
     const rect = card.getBoundingClientRect();
     card.style.setProperty('--mx', `${e.clientX - rect.left}px`);

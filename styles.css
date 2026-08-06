@@ -839,3 +839,152 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   color: var(--accent);
 }
+
+/* ============ Path chooser (two tracks) ============ */
+.path-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.path-card {
+  position: relative;
+  display: block;
+  background: #161617;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 46px 40px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+.path-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.22);
+  text-decoration: none;
+}
+
+.path-icon { font-size: 40px; display: block; margin-bottom: 20px; position: relative; }
+
+.path-kicker {
+  position: relative;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-on-dark-sub);
+  margin-bottom: 10px;
+}
+
+.path-card h3 {
+  position: relative;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text-on-dark);
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+
+.path-desc {
+  position: relative;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-on-dark-sub);
+  margin-bottom: 22px;
+}
+
+.path-points {
+  position: relative;
+  list-style: none;
+  margin-bottom: 28px;
+}
+.path-points li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.path-points li::before {
+  content: "";
+  position: absolute;
+  left: 2px; top: 8px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.path-embedded .path-points li::before { background: #30d158; }
+.path-aiml .path-points li::before { background: #bf5af2; }
+
+.path-cta {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  padding: 11px 24px;
+  border-radius: 980px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+.path-embedded .path-cta { background: linear-gradient(135deg, #30d158, #0a84ff); }
+.path-aiml .path-cta { background: linear-gradient(135deg, #bf5af2, #ff375f); }
+.path-card:hover .path-cta { transform: scale(1.04); filter: brightness(1.1); }
+
+.path-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    460px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.path-card:hover::after { opacity: 1; }
+
+.path-glow {
+  position: absolute;
+  top: -70px; right: -70px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  transition: opacity 0.35s ease;
+}
+.path-card:hover .path-glow { opacity: 0.55; }
+.path-embedded .path-glow { background: #30d158; }
+.path-aiml .path-glow { background: #bf5af2; }
+
+@media (max-width: 900px) {
+  .path-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ Track pages (embedded.html / ai-ml.html) ============ */
+.hero.hero-track { min-height: 72vh; }
+
+.track-switch {
+  margin-top: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-on-dark-sub);
+}
+.track-switch a { color: #6cb2ff; font-weight: 600; }
+
+.breadcrumb {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #86868b;
+  margin-bottom: 16px;
+}
+.breadcrumb a { color: #86868b; }
+.breadcrumb a:hover { color: #f5f5f7; text-decoration: none; }
+.breadcrumb .sep { margin: 0 8px; opacity: 0.5; }
